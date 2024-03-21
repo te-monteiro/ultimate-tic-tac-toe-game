@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tic-tac-toe-client
+spec:
+  replicas: 3  # Adjust as needed
+  selector:
+    matchLabels:
+      app: tic-tac-toe-client
+  template:
+    metadata:
+      labels:
+        app: tic-tac-toe-client
+    spec:
+      containers:
+        - name: tic-tac-toe-client
+          image: teresamonteiro/tic-tac-toe-client:clientv1
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tic-tac-toe-client-service
+spec:
+  selector:
+    app: tic-tac-toe-client
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+type: NodePort  
+

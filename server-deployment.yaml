@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tic-tac-toe-server
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: tic-tac-toe-server
+  template:
+    metadata:
+      labels:
+        app: tic-tac-toe-server
+    spec:
+      containers:
+        - name: tic-tac-toe-server
+          image: teresamonteiro/tic-tac-toe-server:serverv1
+          ports:
+            - containerPort: 3000
